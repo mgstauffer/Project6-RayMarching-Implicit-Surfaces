@@ -47,6 +47,10 @@ export default class ProxyGeometry {
                 this._buffer[PROXY_BUFFER_SIZE*i+3] = 1;
             } else if (child.geometry instanceof THREE.ConeGeometry) {
                 this._buffer[PROXY_BUFFER_SIZE*i+3] = 2;
+            } else if (child.geometry instanceof THREE.CylinderGeometry) {
+                this._buffer[PROXY_BUFFER_SIZE*i+3] = 3;
+            } else if (child.geometry instanceof THREE.TorusGeometry) {
+                this._buffer[PROXY_BUFFER_SIZE*i+3] = 4;
             }
         }
     }
