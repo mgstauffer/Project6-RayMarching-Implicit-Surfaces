@@ -1,5 +1,20 @@
 # HW 6: Ray marching and SDFs
 
+## Stauffer
+
+Wow, this was a mess for me. I spun my wheels about the non-constant array indexing issue I posted about. I'm confused about what other students were doing, or whether the u_buffer method was tested before being used in our base code.
+
+I got most of the basics implemented. Here's what you see in my scene:
+
+- My perspective is messed up. Presumably I'm not doing the un-projecting from uv to world space correctly, but I didn't have time to sort it out.
+- Each of the basic shapes: box, sphere, cone, torus, cylinder
+- I implemented very simple specular highlighting in my shading, using the surface normals. I'm curious about why the shading is banded/not-fully-smooth.
+- The 2nd box above the first shows simple subtraction of a cylinder. However the shading is inverted. I got the normal from the subratced surface, i.e. the cylinder when it's negated distance was greater than the distance of the box. However I figure the normal needs inversion since we're shading the inside, but my rushed code couldn't handle a flag for that. -- wait! I just hacked it in, looks better now.
+- The clam-like shape above the lower sphere is an intersection of two spheres.
+- That's all, folks!
+
+## -----------------------------------------------------------------------------
+
 ## Goal
 In this assignment, you will be implementing SDF operators on various primitives and use a ray marcher to render them. Ray marching is a technique for rendering implicit surfaces where the ray-primitive intersection equation cannot be solved analytically.
 

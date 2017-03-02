@@ -19,6 +19,7 @@ varying vec2 f_uv;
 varying vec3 f_position;
 
 vec4 chosenGeo;
+bool invertnormal;
 
 //Convert uv to world coords
 vec3 uvToWorld( vec2 uv ){
@@ -139,6 +140,7 @@ float intersection( float d1, float d2 ){
 float getMinGeometryDistManual( vec3 point ){
     float minDist = INF;
     float dist;
+    invertnormal = false;
 
     if( u_count < 1 )
         return minDist;
@@ -199,8 +201,11 @@ float getMinGeometryDistManual( vec3 point ){
     dist = max( dist1, -dist2 );
     if( dist < minDist ){
         minDist = dist;
-        if( -dist2 > dist1)
+        if( -dist2 > dist1){
+            //inside the subtracted surface
             chosenGeo = u_buffer[8];
+            invertnormal = true;
+        }
         else
             chosenGeo = u_buffer[7];
     }
@@ -271,6 +276,8 @@ void main() {
     if( onSurface == true ){
         //get the normal
         vec3 n = getNormal( point, chosenGeo );
+        if( invertnormal )
+            n *= -1.0;
         //color.rgb = abs(n); //vec3(1.0, 0.0, 0.0);
         
         //simple shading
